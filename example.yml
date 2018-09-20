@@ -1,0 +1,10 @@
+---
+- hosts: centos7
+  remote_user: centos
+  gather_facts: False
+
+  tasks:
+  - name: create a dummy file
+    become: yes
+    become_user: root
+    shell: touch /root/{{ file1 }}; touch /root/{{ file2 }}
