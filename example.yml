@@ -1,10 +1,13 @@
 ---
-- hosts: centos7
-  remote_user: centos
+- hosts: clab3417
+  remote_user: omc
   gather_facts: False
 
   tasks:
+  - name: wait for the node to wake up
+    local_action: wait_for host={{ ansible_host }} port=22 timeout=600 state=started
+
   - name: create a dummy file
     become: yes
-    become_user: root
-    shell: touch /root/{{ file1 }}; touch /root/{{ file2 }}
+    become_user: omc
+    shell: touch /home/omc/{{ file1 }}; touch /home/omc/{{ file2 }}
